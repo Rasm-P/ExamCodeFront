@@ -4,11 +4,20 @@ import { NavLink } from "react-router-dom";
 const Header = props => {
   const { loginFacade, loggedIn } = props;
 
-  const roleHeaders =
+  const roleHeader1 =
+  loggedIn && loginFacade.tokenDecoder().roles === "admin" ? (
+    <li>
+      <NavLink activeClassName="active" to="/sortDeliveries">
+      Sort Deliveries
+      </NavLink>
+    </li>
+  ) : null;
+
+  const roleHeader2 =
     loggedIn && loginFacade.tokenDecoder().roles === "admin" ? (
       <li>
-        <NavLink activeClassName="active" to="/adminpage">
-          Admin Page
+        <NavLink activeClassName="active" to="/management">
+          Management
         </NavLink>
       </li>
     ) : null;
@@ -35,16 +44,12 @@ const Header = props => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to="/searchforpersons">
-          Search for Persons
+        <NavLink activeClassName="active" to="/truckDriverBooking">
+        Truck and Driver Booking
         </NavLink>
       </li>
-      <li>
-        <NavLink activeClassName="active" to="/searchbyhobby">
-          Search by Hobby
-        </NavLink>
-      </li>
-      {roleHeaders}
+      {roleHeader1}
+      {roleHeader2}
       {loginHeaders}
     </ul>
   );

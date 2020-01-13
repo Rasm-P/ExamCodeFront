@@ -6,9 +6,9 @@ import StartPage from "./components/Home";
 import LogIn from "./components/LogIn";
 import Header from "./components/Header";
 import Logout from "./components/Logout";
-import SearchForPersons from "./components/SearchForPersons";
-import SearchByHobby from "./components/SearchByHobby";
-import Adminpage from "./components/Adminpage";
+import TruckDriverBooking from "./components/TruckDriverBooking";
+import SortDeliveries from "./components/SortDeliveries";
+import Management from "./components/Management";
 
 const NoMatch = () => {
   return <h3>The page was not found.</h3>;
@@ -58,14 +58,14 @@ const App = props => {
             setLoggedIn={setLoggedIn}
           />
         </Route>
-        <Route path="/searchforpersons">
-          <SearchForPersons />
+        <Route path="/truckDriverBooking">
+          <TruckDriverBooking />
         </Route>
-        <Route path="/searchbyhobby">
-          <SearchByHobby />
+        <Route path="/sortDeliveries">
+          <SortDeliveries />
         </Route>
-        <Route path="/adminpage">
-          <Adminpage loggedIn={loggedIn} />
+        <Route path="/management">
+          <Management loggedIn={loggedIn} />
         </Route>
         <Route>
           <NoMatch />
