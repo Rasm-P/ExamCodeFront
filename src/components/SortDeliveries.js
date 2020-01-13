@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { catchHttpErrors } from "../utils";
 import { Route, useRouteMatch, Link } from "react-router-dom";
 
-const SearchByHobby = props => {
+const SortDeliveries = props => {
   const { EndpointFacade } = props;
 
   const inputfield = { input: "" };
@@ -117,4 +117,4 @@ const DeliveryLink = ({ match, allDeliveries }) => {
   );
 };
 
-export default SearchByHobby;
+export default SortDeliveries;

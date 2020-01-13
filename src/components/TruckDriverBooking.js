@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { catchHttpErrors } from "../utils";
 
-const SearchForPersons = props => {
+const TruckDriverBooking = props => {
   const { EndpointFacade } = props;
 
   const inputfield = { input: "" };
@@ -91,4 +91,4 @@ const SearchForPersons = props => {
   );
 };
 
-export default SearchForPersons;
+export default TruckDriverBooking;

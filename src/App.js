@@ -19,8 +19,6 @@ const App = props => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [info, setInfo] = useState("");
-  const [update, setUpdate] = useState(false);
-  const [allCargo, setAllCargo] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +69,7 @@ const App = props => {
           />
         </Route>
         <Route path="/management">
-          <Management loggedIn={loggedIn} />
+          <Management loggedIn={loggedIn} EndpointFacade={EndpointFacade}/>
         </Route>
         <Route>
           <NoMatch />
