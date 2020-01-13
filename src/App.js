@@ -20,6 +20,7 @@ const App = props => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [info, setInfo] = useState("");
   const [update, setUpdate] = useState(false);
+  const [allCargo, setAllCargo] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,10 +60,15 @@ const App = props => {
           />
         </Route>
         <Route path="/truckDriverBooking">
-          <TruckDriverBooking />
+          <TruckDriverBooking 
+    EndpointFacade={EndpointFacade}
+          
+          />
         </Route>
         <Route path="/sortDeliveries">
-          <SortDeliveries />
+          <SortDeliveries 
+          EndpointFacade={EndpointFacade}
+          />
         </Route>
         <Route path="/management">
           <Management loggedIn={loggedIn} />
