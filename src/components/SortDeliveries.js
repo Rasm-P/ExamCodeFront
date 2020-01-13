@@ -33,7 +33,7 @@ const SortDeliveries = props => {
 
   return (
     <div className="col-sm-offset-3 col-sm-9">
-      <h1>Search for persons</h1>
+      <h1>Search for Deliveries</h1>
       <form className="form-horizontal">
         <input
           onChange={handleChange}

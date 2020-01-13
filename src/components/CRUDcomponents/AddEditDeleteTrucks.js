@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Prompt, Link } from "react-router-dom";
 
-const AddEditDeleteDriver = ({
+const AddEditDeletetruck = ({
   EndpointFacade,
   setIsBlocking,
   isBlocking,
   catchHttpErrors,
   setUpdate,
-  allDrivers
+  allTrucks
 }) => {
-  const emptyDriver = {
-    name: ""
+  const emptyTruck = {
+    name: "",
+    capacity: 0
   };
-  const [driverToAddEdit, setDriverToAddEdit] = useState({ ...emptyDriver });
-
-  const storeAddEditDriver = driver => {
-    EndpointFacade.addEditDriver(driver).catch(catchHttpErrors);
+  const [truckToAddEdit, setTruckToAddEdit] = useState({ ...emptyTruck });
+  
+  const storeAddEditTruck = truck => {
+    EndpointFacade.addEditTruck(truck).catch(catchHttpErrors);
   };
 
-  const deleteDriver = id => {
-    EndpointFacade.deleteDriver(id).catch(catchHttpErrors);
+  const deleteTruck = id => {
+    EndpointFacade.deleteTruck(id).catch(catchHttpErrors);
     setUpdate(true);
   };
 
-  const editDriver = driver => {
-    const edit = { ...driver };
-    setDriverToAddEdit(edit);
+  const editTruck = truck => {
+    const edit = { ...truck };
+    setTruckToAddEdit(edit);
   };
 
   const handleChange = event => {
     const target = event.target;
     const name = target.id;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    setDriverToAddEdit({ ...driverToAddEdit, [name]: value });
+    setTruckToAddEdit({ ...truckToAddEdit, [name]: value });
     setIsBlocking(true);
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (driverToAddEdit != emptyDriver) {
-      storeAddEditDriver(driverToAddEdit);
-      setDriverToAddEdit({ ...emptyDriver });
+    if (truckToAddEdit != emptyTruck) {
+      storeAddEditTruck(truckToAddEdit);
+      setTruckToAddEdit({ ...emptyTruck });
       event.target.reset();
       setIsBlocking(false);
       setUpdate(true);
@@ -52,7 +53,7 @@ const AddEditDeleteDriver = ({
   return (
     <div>
       <Link to={`/management`}>
-        <h5>Add/Edit/Delete Driver</h5>
+        <h5>Add/Edit/Delete Truck</h5>
       </Link>
       <form
         className="form-horizontal"
@@ -73,7 +74,7 @@ const AddEditDeleteDriver = ({
               readOnly
               id="id"
               placeholder="Id"
-              value={driverToAddEdit.id}
+              value={truckToAddEdit.id}
             />
           </div>
         </div>
@@ -86,7 +87,20 @@ const AddEditDeleteDriver = ({
               className="form-control"
               id="name"
               placeholder="Enter name"
-              value={driverToAddEdit.name}
+              value={truckToAddEdit.name}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="capacity">
+            Capacity:
+          </label>
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              id="capacity"
+              placeholder="Enter capacity"
+              value={truckToAddEdit.capacity}
             />
           </div>
         </div>
@@ -103,20 +117,22 @@ const AddEditDeleteDriver = ({
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Capacity</th>
           </tr>
         </thead>
         <tbody>
-          {allDrivers.map(driver => (
-            <tr key={driver.id}>
-              <th>{driver.id}</th>
-              <th>{driver.name}</th>
+          {allTrucks.map(truck => (
+            <tr key={truck.id}>
+              <th>{truck.id}</th>
+              <th>{truck.name}</th>
+              <th>{truck.capacity}</th>
               <td>
                 (
                 <a
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    editDriver(driver);
+                    editTruck(truck);
                   }}
                 >
                   edit
@@ -126,7 +142,7 @@ const AddEditDeleteDriver = ({
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    deleteDriver(driver.id);
+                    deleteTruck(truck.id);
                   }}
                 >
                   delete)
@@ -140,4 +156,4 @@ const AddEditDeleteDriver = ({
   );
 };
 
-export default AddEditDeleteDriver;
+export default AddEditDeletetruck;

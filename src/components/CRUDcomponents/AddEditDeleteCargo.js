@@ -1,46 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Prompt, Link } from "react-router-dom";
 
-const AddEditDeleteDriver = ({
+const AddEditDeleteCargo = ({
   EndpointFacade,
   setIsBlocking,
   isBlocking,
   catchHttpErrors,
   setUpdate,
-  allDrivers
+  allCargo
 }) => {
-  const emptyDriver = {
-    name: ""
+  const emptyCargo = {
+    name: "",
+    weight: 0.0,
+    units: 0
   };
-  const [driverToAddEdit, setDriverToAddEdit] = useState({ ...emptyDriver });
+  const [cargoToAddEdit, setCargoToAddEdit] = useState({ ...emptyCargo });
 
-  const storeAddEditDriver = driver => {
-    EndpointFacade.addEditDriver(driver).catch(catchHttpErrors);
+  const storeAddEditCargo = cargo => {
+    EndpointFacade.addEditCargo(cargo).catch(catchHttpErrors);
   };
 
-  const deleteDriver = id => {
-    EndpointFacade.deleteDriver(id).catch(catchHttpErrors);
+  const deleteCargo = id => {
+    EndpointFacade.deleteCargo(id).catch(catchHttpErrors);
     setUpdate(true);
   };
 
-  const editDriver = driver => {
-    const edit = { ...driver };
-    setDriverToAddEdit(edit);
+  const editCargo = cargo => {
+    const edit = { ...cargo };
+    setCargoToAddEdit(edit);
   };
 
   const handleChange = event => {
     const target = event.target;
     const name = target.id;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    setDriverToAddEdit({ ...driverToAddEdit, [name]: value });
+    setCargoToAddEdit({ ...cargoToAddEdit, [name]: value });
     setIsBlocking(true);
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (driverToAddEdit != emptyDriver) {
-      storeAddEditDriver(driverToAddEdit);
-      setDriverToAddEdit({ ...emptyDriver });
+    if (cargoToAddEdit != emptyCargo) {
+      storeAddEditCargo(cargoToAddEdit);
+      setCargoToAddEdit({ ...emptyCargo });
       event.target.reset();
       setIsBlocking(false);
       setUpdate(true);
@@ -52,7 +54,7 @@ const AddEditDeleteDriver = ({
   return (
     <div>
       <Link to={`/management`}>
-        <h5>Add/Edit/Delete Driver</h5>
+        <h5>Add/Edit/Delete Cargo</h5>
       </Link>
       <form
         className="form-horizontal"
@@ -73,7 +75,7 @@ const AddEditDeleteDriver = ({
               readOnly
               id="id"
               placeholder="Id"
-              value={driverToAddEdit.id}
+              value={cargoToAddEdit.id}
             />
           </div>
         </div>
@@ -86,7 +88,33 @@ const AddEditDeleteDriver = ({
               className="form-control"
               id="name"
               placeholder="Enter name"
-              value={driverToAddEdit.name}
+              value={cargoToAddEdit.name}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="weight">
+            Weight:
+          </label>
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              id="weight"
+              placeholder="Enter weight"
+              value={cargoToAddEdit.weight}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="units">
+            Units:
+          </label>
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              id="units"
+              placeholder="Enter units"
+              value={cargoToAddEdit.units}
             />
           </div>
         </div>
@@ -103,20 +131,24 @@ const AddEditDeleteDriver = ({
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Weight</th>
+            <th>Units</th>
           </tr>
         </thead>
         <tbody>
-          {allDrivers.map(driver => (
-            <tr key={driver.id}>
-              <th>{driver.id}</th>
-              <th>{driver.name}</th>
+          {allCargo.map(cargo => (
+            <tr key={cargo.id}>
+              <th>{cargo.id}</th>
+              <th>{cargo.name}</th>
+              <th>{cargo.weight}</th>
+              <th>{cargo.units}</th>
               <td>
                 (
                 <a
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    editDriver(driver);
+                    editCargo(cargo);
                   }}
                 >
                   edit
@@ -126,7 +158,7 @@ const AddEditDeleteDriver = ({
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    deleteDriver(driver.id);
+                    deleteCargo(cargo.id);
                   }}
                 >
                   delete)
@@ -140,4 +172,4 @@ const AddEditDeleteDriver = ({
   );
 };
 
-export default AddEditDeleteDriver;
+export default AddEditDeleteCargo;

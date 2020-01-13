@@ -25,7 +25,7 @@ const endpointFacade = () => {
     return us;
   }
 
-  function addEditCargoy(cargo) {
+  function addEditCargo(cargo) {
     let fetchUrl = URL + "/api/cargo";
     if (typeof cargo.id === "undefined") {
       const options = makeOptions("POST", true, cargo);
@@ -132,7 +132,7 @@ const endpointFacade = () => {
     fetchUserInfo: fetchUserInfo,
     deleteCargo: deleteCargo,
     fetchAllCargo: fetchAllCargo,
-    addEditCargoy: addEditCargoy,
+    addEditCargo: addEditCargo,
     deleteDelivery: deleteDelivery,
     addEditDelivery: addEditDelivery,
     fetchAllDelivery: fetchAllDelivery,
