@@ -58,18 +58,13 @@ const App = props => {
           />
         </Route>
         <Route path="/truckDriverBooking">
-          <TruckDriverBooking 
-    EndpointFacade={EndpointFacade}
-          
-          />
+          <TruckDriverBooking EndpointFacade={EndpointFacade} />
         </Route>
         <Route path="/sortDeliveries">
-          <SortDeliveries 
-          EndpointFacade={EndpointFacade}
-          />
+          <SortDeliveries EndpointFacade={EndpointFacade} />
         </Route>
         <Route path="/management">
-          <Management loggedIn={loggedIn} EndpointFacade={EndpointFacade}/>
+          <Management loggedIn={loggedIn} EndpointFacade={EndpointFacade} />
         </Route>
         <Route>
           <NoMatch />

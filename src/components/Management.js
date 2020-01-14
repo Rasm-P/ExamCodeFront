@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Route, Redirect, Router, useRouteMatch, Link } from "react-router-dom";
+import { Route, Redirect, useRouteMatch, Link } from "react-router-dom";
 import AddEditDeleteDriver from "./CRUDcomponents/AddEditDeleteDriver";
 import AddEditDeleteTrucks from "./CRUDcomponents/AddEditDeleteTrucks";
 import AddEditDeleteCargo from "./CRUDcomponents/AddEditDeleteCargo";
+import AddEditDeleteDelivery from "./CRUDcomponents/AddEditDeleteDelivery";
 import { catchHttpErrors } from "../utils";
 
 const Management = props => {
@@ -13,6 +14,7 @@ const Management = props => {
   const [allTrucks, setAllTrucks] = useState([]);
   const [allDrivers, setAllDrivers] = useState([]);
   const [allCargo, setAllCargo] = useState([]);
+  const [allDeliveries, setAllDeliveries] = useState([]);
 
   useEffect(() => {
     setUpdate(false);
@@ -30,6 +32,12 @@ const Management = props => {
   useEffect(() => {
     EndpointFacade.fetchAllCargo()
       .then(data => setAllCargo(data))
+      .catch(catchHttpErrors);
+  }, [update]);
+
+  useEffect(() => {
+    EndpointFacade.fetchAllDelivery()
+      .then(data => setAllDeliveries(data))
       .catch(catchHttpErrors);
   }, [update]);
 
@@ -57,6 +65,12 @@ const Management = props => {
               <Link to={`${match.url}/addEditDeleteCargo`}>
                 {" "}
                 Add/Edit/Delete Cargo{" "}
+              </Link>
+            </li>
+            <li>
+              <Link to={`${match.url}/addEditDeleteDelivery`}>
+                {" "}
+                Add/Edit/Delete Deliveries{" "}
               </Link>
             </li>
           </ul>
@@ -96,6 +110,19 @@ const Management = props => {
                 catchHttpErrors={catchHttpErrors}
                 setUpdate={setUpdate}
                 allCargo={allCargo}
+              />
+            )}
+          />
+          <Route
+            path={`${match.path}/addEditDeleteDelivery`}
+            render={() => (
+              <AddEditDeleteDelivery
+                isBlocking={isBlocking}
+                setIsBlocking={setIsBlocking}
+                EndpointFacade={EndpointFacade}
+                catchHttpErrors={catchHttpErrors}
+                setUpdate={setUpdate}
+                allDeliveries={allDeliveries}
               />
             )}
           />

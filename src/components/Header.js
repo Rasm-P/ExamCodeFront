@@ -5,13 +5,13 @@ const Header = props => {
   const { loginFacade, loggedIn } = props;
 
   const roleHeader1 =
-  loggedIn && loginFacade.tokenDecoder().roles === "admin" ? (
-    <li>
-      <NavLink activeClassName="active" to="/sortDeliveries">
-      Sort Deliveries
-      </NavLink>
-    </li>
-  ) : null;
+    loggedIn && loginFacade.tokenDecoder().roles === "admin" ? (
+      <li>
+        <NavLink activeClassName="active" to="/sortDeliveries">
+          Sort Deliveries
+        </NavLink>
+      </li>
+    ) : null;
 
   const roleHeader2 =
     loggedIn && loginFacade.tokenDecoder().roles === "admin" ? (
@@ -45,7 +45,7 @@ const Header = props => {
       </li>
       <li>
         <NavLink activeClassName="active" to="/truckDriverBooking">
-        Truck and Driver Booking
+          Truck and Driver Booking
         </NavLink>
       </li>
       {roleHeader1}

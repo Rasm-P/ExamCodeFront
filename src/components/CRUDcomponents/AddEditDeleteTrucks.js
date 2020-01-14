@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Prompt, Link } from "react-router-dom";
+import { Prompt, Link } from "react-router-dom";
 
 const AddEditDeletetruck = ({
   EndpointFacade,
@@ -14,7 +14,7 @@ const AddEditDeletetruck = ({
     capacity: 0
   };
   const [truckToAddEdit, setTruckToAddEdit] = useState({ ...emptyTruck });
-  
+
   const storeAddEditTruck = truck => {
     EndpointFacade.addEditTruck(truck).catch(catchHttpErrors);
   };

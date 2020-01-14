@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Prompt, Link } from "react-router-dom";
+import { Prompt, Link } from "react-router-dom";
 
 const AddEditDeleteDriver = ({
   EndpointFacade,

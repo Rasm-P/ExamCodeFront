@@ -1,48 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Prompt, Link } from "react-router-dom";
 
-const AddEditDeleteCargo = ({
+const AddEditDeletedelivery = ({
   EndpointFacade,
   setIsBlocking,
   isBlocking,
   catchHttpErrors,
   setUpdate,
-  allCargo
+  allDeliveries
 }) => {
-  const emptyCargo = {
-    name: "",
-    weight: 0.0,
-    units: 0
+  const emptyDelivery = {
+    shippingDate: "2020-01-13T22:49:37.101Z",
+    fromLocation: "",
+    toLocation: ""
   };
-  const [cargoToAddEdit, setCargoToAddEdit] = useState({ ...emptyCargo });
+  const [deliveryToAddEdit, setDeliveryToAddEdit] = useState({
+    ...emptyDelivery
+  });
 
-  const storeAddEditCargo = cargo => {
-    EndpointFacade.addEditCargo(cargo).catch(catchHttpErrors);
+  const storeAddEditDelivery = delivery => {
+    EndpointFacade.addEditDelivery(delivery).catch(catchHttpErrors);
   };
 
-  const deleteCargo = id => {
-    EndpointFacade.deleteCargo(id).catch(catchHttpErrors);
+  const deleteDelivery = id => {
+    EndpointFacade.deleteDelivery(id).catch(catchHttpErrors);
     setUpdate(true);
   };
 
-  const editCargo = cargo => {
-    const edit = { ...cargo };
-    setCargoToAddEdit(edit);
+  const editDelivery = delivery => {
+    const edit = { ...delivery };
+    setDeliveryToAddEdit(edit);
   };
 
   const handleChange = event => {
     const target = event.target;
     const name = target.id;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    setCargoToAddEdit({ ...cargoToAddEdit, [name]: value });
+    setDeliveryToAddEdit({ ...deliveryToAddEdit, [name]: value });
     setIsBlocking(true);
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (cargoToAddEdit != emptyCargo) {
-      storeAddEditCargo(cargoToAddEdit);
-      setCargoToAddEdit({ ...emptyCargo });
+    if (deliveryToAddEdit != emptyDelivery) {
+      storeAddEditDelivery(deliveryToAddEdit);
+      setDeliveryToAddEdit({ ...emptyDelivery });
       event.target.reset();
       setIsBlocking(false);
       setUpdate(true);
@@ -54,7 +56,7 @@ const AddEditDeleteCargo = ({
   return (
     <div>
       <Link to={`/management`}>
-        <h5>Add/Edit/Delete Cargo</h5>
+        <h5>Add/Edit/Delete Delivery</h5>
       </Link>
       <form
         className="form-horizontal"
@@ -75,46 +77,46 @@ const AddEditDeleteCargo = ({
               readOnly
               id="id"
               placeholder="Id"
-              value={cargoToAddEdit.id}
+              value={deliveryToAddEdit.id}
             />
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-3" htmlFor="name">
-            Name:
+          <label className="control-label col-sm-3" htmlFor="shippingDate">
+            Shipping Date:
           </label>
           <div className="col-sm-9">
             <input
               className="form-control"
-              id="name"
-              placeholder="Enter name"
-              value={cargoToAddEdit.name}
+              id="shippingDate"
+              placeholder="Enter Shipping Date"
+              value={deliveryToAddEdit.shippingDate}
             />
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-3" htmlFor="weight">
-            Weight:
+          <label className="control-label col-sm-3" htmlFor="fromLocation">
+            From Location:
           </label>
           <div className="col-sm-9">
             <input
               className="form-control"
-              id="weight"
-              placeholder="Enter weight"
-              value={cargoToAddEdit.weight}
+              id="fromLocation"
+              placeholder="Enter From Location"
+              value={deliveryToAddEdit.fromLocation}
             />
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-3" htmlFor="units">
-            Units:
+          <label className="control-label col-sm-3" htmlFor="toLocation">
+            To Location:
           </label>
           <div className="col-sm-9">
             <input
               className="form-control"
-              id="units"
-              placeholder="Enter units"
-              value={cargoToAddEdit.units}
+              id="toLocation"
+              placeholder="Enter To Location"
+              value={deliveryToAddEdit.toLocation}
             />
           </div>
         </div>
@@ -130,25 +132,25 @@ const AddEditDeleteCargo = ({
         <thead>
           <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Weight</th>
-            <th>Units</th>
+            <th>Shipping Date</th>
+            <th>From Location</th>
+            <th>To Location</th>
           </tr>
         </thead>
         <tbody>
-          {allCargo.map(cargo => (
-            <tr key={cargo.id}>
-              <th>{cargo.id}</th>
-              <th>{cargo.name}</th>
-              <th>{cargo.weight}</th>
-              <th>{cargo.units}</th>
+          {allDeliveries.map(delivery => (
+            <tr key={delivery.id}>
+              <th>{delivery.id}</th>
+              <th>{delivery.shippingDate}</th>
+              <th>{delivery.fromLocation}</th>
+              <th>{delivery.toLocation}</th>
               <td>
                 (
                 <a
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    editCargo(cargo);
+                    editDelivery(delivery);
                   }}
                 >
                   edit
@@ -158,7 +160,7 @@ const AddEditDeleteCargo = ({
                   href="xx"
                   onClick={e => {
                     e.preventDefault();
-                    deleteCargo(cargo.id);
+                    deleteDelivery(delivery.id);
                   }}
                 >
                   delete)
@@ -172,4 +174,4 @@ const AddEditDeleteCargo = ({
   );
 };
 
-export default AddEditDeleteCargo;
+export default AddEditDeletedelivery;
