@@ -22,7 +22,8 @@ const AddEditDeleteCargo = ({
 
   const deleteCargo = id => {
     EndpointFacade.deleteCargo(id).catch(catchHttpErrors);
-    setUpdate(true);
+    setTimeout(() => { setUpdate(true) }, 500);
+    ;
   };
 
   const editCargo = cargo => {
@@ -45,7 +46,7 @@ const AddEditDeleteCargo = ({
       setCargoToAddEdit({ ...emptyCargo });
       event.target.reset();
       setIsBlocking(false);
-      setUpdate(true);
+      setTimeout(() => { setUpdate(true) }, 500);
     } else {
       window.alert("Plase change the values in the fields before submition!");
     }

@@ -24,7 +24,7 @@ const AddEditDeletedelivery = ({
 
   const deleteDelivery = id => {
     EndpointFacade.deleteDelivery(id).catch(catchHttpErrors);
-    setUpdate(true);
+    setTimeout(() => { setUpdate(true) }, 500);
   };
 
   const editDelivery = delivery => {
@@ -47,7 +47,7 @@ const AddEditDeletedelivery = ({
       setDeliveryToAddEdit({ ...emptyDelivery });
       event.target.reset();
       setIsBlocking(false);
-      setUpdate(true);
+      setTimeout(() => { setUpdate(true) }, 500);
     } else {
       window.alert("Plase change the values in the fields before submition!");
     }

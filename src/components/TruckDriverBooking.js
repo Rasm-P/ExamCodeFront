@@ -42,7 +42,7 @@ const TruckDriverBooking = props => {
         <input
           className="form-control"
           id="input"
-          placeholder="Search by date 'YYYY-MM-DD'"
+          placeholder="Search for Driver by date 'YYYY-MM-DD'"
         />
         <button type="submit" className="btn btn-primary">
           Get Drivers
@@ -58,7 +58,7 @@ const TruckDriverBooking = props => {
         <input
           className="form-control"
           id="input"
-          placeholder="Search by date 'YYYY-MM-DD'"
+          placeholder="Search for Truck by date 'YYYY-MM-DD'"
         />
         <button type="submit" className="btn btn-primary">
           Get Trucks

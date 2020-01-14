@@ -21,7 +21,7 @@ const AddEditDeletetruck = ({
 
   const deleteTruck = id => {
     EndpointFacade.deleteTruck(id).catch(catchHttpErrors);
-    setUpdate(true);
+    setTimeout(() => { setUpdate(true) }, 500);
   };
 
   const editTruck = truck => {
@@ -44,7 +44,7 @@ const AddEditDeletetruck = ({
       setTruckToAddEdit({ ...emptyTruck });
       event.target.reset();
       setIsBlocking(false);
-      setUpdate(true);
+      setTimeout(() => { setUpdate(true) }, 500);
     } else {
       window.alert("Plase change the values in the fields before submition!");
     }

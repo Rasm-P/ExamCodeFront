@@ -20,7 +20,7 @@ const AddEditDeleteDriver = ({
 
   const deleteDriver = id => {
     EndpointFacade.deleteDriver(id).catch(catchHttpErrors);
-    setUpdate(true);
+    setTimeout(() => { setUpdate(true) }, 500);
   };
 
   const editDriver = driver => {
@@ -43,7 +43,7 @@ const AddEditDeleteDriver = ({
       setDriverToAddEdit({ ...emptyDriver });
       event.target.reset();
       setIsBlocking(false);
-      setUpdate(true);
+      setTimeout(() => { setUpdate(true) }, 500);
     } else {
       window.alert("Plase change the values in the fields before submition!");
     }
