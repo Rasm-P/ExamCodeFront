@@ -57,7 +57,10 @@ const SortDeliveries = props => {
                 {filteredData.map(item => (
                   <tr key={item.id}>
                     <td>
-                      <Link to={`${match.url}/${item.id}`}> {item.id} </Link>
+                      <Link to={`${match.url}/${item.id}`}>
+                        {" "}
+                        id: {item.id}{" "}
+                      </Link>
                     </td>
                     <td>{item.shippingDate}</td>
                     <td>{item.fromLocation}</td>
