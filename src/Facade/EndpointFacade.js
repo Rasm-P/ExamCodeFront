@@ -78,7 +78,7 @@ const endpointFacade = () => {
   }
 
   function fetchAllDriver() {
-    const options = makeOptions("GET", true);
+    const options = makeOptions("GET", false);
     const us = fetch(
       configuration.URL + "/api/driver/allDrivers",
       options
@@ -110,7 +110,7 @@ const endpointFacade = () => {
   }
 
   function fetchAllTrucks() {
-    const options = makeOptions("GET", true);
+    const options = makeOptions("GET", false);
     const us = fetch(configuration.URL + "/api/truck/allTrucks", options).then(
       handleHttpErrors
     );

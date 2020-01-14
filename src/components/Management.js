@@ -48,6 +48,7 @@ const Management = props => {
       {loggedIn ? (
         <div>
           <h1>Management Page</h1>
+          <p>Add/Edit/Delete: both drivers, trucks, cargo and delivery.</p>
           <ul>
             <li>
               <Link to={`${match.url}/addEditDeleteDriver`}>

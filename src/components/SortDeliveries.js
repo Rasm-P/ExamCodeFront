@@ -34,12 +34,13 @@ const SortDeliveries = props => {
   return (
     <div className="col-sm-offset-3 col-sm-9">
       <h1>Search for Deliveries</h1>
+      <p>Search the filter for Deliveries.</p>
       <form className="form-horizontal">
         <input
           onChange={handleChange}
           className="form-control"
           id="input"
-          placeholder="Search by id, phone, emaril, name..."
+          placeholder="Search by shipping date, from location, destination..."
         />
         {!(search.input === "") ? (
           <table className="table">
